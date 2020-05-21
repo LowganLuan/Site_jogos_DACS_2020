@@ -1,7 +1,10 @@
 <?php
+      include 'not_error.php';
+      include 'dbconnect.php';
+   
       session_start();
   
- 
+   
     //verificar se os dados vieram de um POST
     if ($_POST) {
         //conectar no banco de dados - incluir o arquivo do banco
@@ -11,7 +14,8 @@
          $senha   = trim($_POST["senha"]);
          $resenha = trim($_POST["resenha"]);
          //caso o usuario deixe espaços em branco, o trim retira espaços em branco
-         $conn = mysqli_connect("localhost","bob","bob","univille");
+         //$conn = mysqli_connect("localhost","bob","bob","univille");
+         
          $select = "select * from usuarios where login = ?;";
          $stmts = mysqli_prepare($conn, $select);
          mysqli_stmt_bind_param($stmts, "s", $login);
@@ -39,12 +43,11 @@
         else {
             //se os campos estiverem preenchidos corretamente - valida usuario
             
-            $con = mysqli_connect("localhost","bob","bob","univille");
+        //    $con = mysqli_connect("localhost","bob","bob","univille");
             $insert = "insert into usuarios(login,senha) values(?,?)";
-            $stmt = mysqli_prepare($con, $insert);
+            $stmt = mysqli_prepare($conn, $insert);
             mysqli_stmt_bind_param($stmt, "ss", $login, $resenha);
             mysqli_stmt_execute($stmt);
-
             
             header('Location: '. 'confirmacadastro.html');
             //redirecionar para o arquivo home.php

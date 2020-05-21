@@ -42,12 +42,14 @@
   <div class="container">
     
     <?php
+        include 'not_error.php';
         session_start();
         $sessao = $_SESSION['usuario'];
         $idlogin = $sessao['id'];
-        $con = mysqli_connect("localhost","bob","bob","univille");
+        //$con = mysqli_connect("localhost","bob","bob","univille");
+        include 'dbconnect.php';
         $sql = "select * from lista_de_jogos where idusuario = ?";
-        $stmt = mysqli_prepare($con, $sql);
+        $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $idlogin);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $result);

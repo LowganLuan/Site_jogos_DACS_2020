@@ -1,4 +1,6 @@
 <?php
+    
+     include 'not_error.php';
 
     //iniciar a sessao
      session_start();
@@ -18,10 +20,13 @@
         if (empty($login)) {
             //se o login estiver em branco exibe esta mensagem: "preencha o login"
             echo "<script>alert('Preencha o Login');history.back();</script>";
+            return;
         }
         else if (empty($senha)) {
             //se a senha estiver em branco  exibe esta mensagem: "Preencha o campo senha"
             echo "<script>alert('Preencha o campo senha');history.back();</script>";
+        
+            return;
         }
         else {
             //se os campos estiverem preenchidos corretamente - valida usuario
@@ -29,14 +34,15 @@
       
       
            
-        
-            $con = mysqli_connect("localhost","bob","bob","univille");
+            include 'dbconnect.php';
+            //$con = mysqli_connect("localhost","bob","bob","univille");
             $select = "select * from usuarios where login = ?";
-            $stmt = mysqli_prepare($con, $select);
+            $stmt = mysqli_prepare($conn, $select);
             mysqli_stmt_bind_param($stmt, "s", $login);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_bind_result($stmt, $result);
             $result = mysqli_stmt_get_result($stmt);
+
             $row = $result->fetch_assoc();
       
             $login2 = $row["login"];
@@ -46,9 +52,11 @@
             //verificar se o usuario existe
             if (empty($login2)) {
                 echo "<script>alert('Usuario nao existe');history.back();</script>";
+                return;
             } else if ($senha != $senha2) {
                 //se a senha digitada for diferente da senha do banco
                 echo "<script>alert('Senha inválida');history.back();</script>";
+                return;
             } else {
                 //se existir gravar os dados na sessao e enviar
                 //para a proxima pagina - home.php
@@ -63,6 +71,7 @@
         // se tiver com o login e a senha erradas exibe esta mensagem: Requisicao invalida!
     } else {
        echo "Requisicao invalida!";
+       return;
         exit;
     }
 ?>
