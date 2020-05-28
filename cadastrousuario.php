@@ -1,8 +1,8 @@
+<?php session_start(); ?>
 <?php
       include 'not_error.php';
       include 'dbconnect.php';
    
-      session_start();
   
    
     //verificar se os dados vieram de um POST

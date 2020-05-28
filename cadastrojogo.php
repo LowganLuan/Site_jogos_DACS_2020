@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -43,6 +44,7 @@
     $iduser = $_GET['idlogin'];
   
     if(isset($_GET['id'])){
+      include 'not_error.php';
       include 'dbconnect.php';
       //$con = mysqli_connect("localhost","bob","bob","univille");
       $select = "select * from lista_de_jogos where idjogo = ? and idusuario = ?";

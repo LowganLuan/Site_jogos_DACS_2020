@@ -3,7 +3,7 @@
     $nome     = $_POST['txtNome'];
     $idlogin  = $_POST['txtIduser'];
     $today = date("Y"."."."n"."."."j");
-   
+    include 'not_error.php';
 
     include 'dbconnect.php';
     //$con = mysqli_connect("localhost","bob","bob","univille");

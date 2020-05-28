@@ -34,6 +34,7 @@
   </nav>
   
   <?php
+    include 'not_error.php';
     $id = $_GET['id'];
     $iduser = $_GET['idlogin'];
     

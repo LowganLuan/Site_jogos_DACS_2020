@@ -1,9 +1,9 @@
+<?php session_start(); ?>
 <?php
     
      include 'not_error.php';
 
-    //iniciar a sessao
-     session_start();
+    
 
  
     //verificar se os dados vieram de um POST

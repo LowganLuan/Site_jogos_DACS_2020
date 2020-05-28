@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Lista de jogos</title>
+  <title>Heroic Features - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,16 +23,26 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-
+      <a class="navbar-brand" href="#">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a href="login.html" class="nav-link" href="#">Sair
+            <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -43,54 +51,41 @@
   <!-- Page Content -->
   <div class="container">
     
-  
     <?php
-        include 'not_error.php';
-        $sessao = $_SESSION['usuario'];
-        $idlogin = $sessao['id'];
-        //$con = mysqli_connect("localhost","bob","bob","univille");
-        include 'dbconnect.php';
-        $sql = "select * from lista_de_jogos where idusuario = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $idlogin);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result);
-        $result = mysqli_stmt_get_result($stmt);
-
-      
+        
+        $con = mysqli_connect("localhost","bob","bob","univille");
+        $sql = "select * from cliente";
+        $result = mysqli_query($con,$sql);
+        
+        
     ?>
     
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
-    
-      <div align="center">
-        <h2>Lista de Jogos</h2>      
-        <img src="jogos.gif"></img>
-      </div>
-      <a href="cadastrojogo.php?idlogin=<?=$idlogin?>" class="btn btn-success">Incluir</a>
-    
+      <a href="formcliente.php" class="btn btn-primary" role="button">Incluir</a>
+      <h2>Lista de Clientes</h2>
       <p class="lead">
         <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nome</th>
-      <th scope="col">Data de inserção</th>
+      <th scope="col">Endereco</th>
       <th scope="col">Ação</th>
     </tr>
   </thead>
   <tbody>
     <?php
-    
-       while($row = $result->fetch_assoc()){
-
+       while($row = $result->fetch_row()){
+               
+            
     ?>
     <tr>
-      <th scope="row"><?=$row['idjogo']?></th>
-      <td><?=$row['nomejogo']?></td>
-      <td><?=$row['data_insercao']?></td>
-      <td><a href="cadastrojogo.php?idlogin=<?=$idlogin?>&id=<?=$row['idjogo']?>" class="btn btn-outline-warning">Alterar</a>
-          <a href="confirmaremovejogo.php?idlogin=<?=$idlogin?>&id=<?=$row['idjogo']?>" class= "btn btn-outline-danger">Remover</a>
+      <th scope="row"><?=$row[0]?></th>
+      <td><?=$row[1]?></td>
+      <td><?=$row[2]?></td>
+      <td><a href="formcliente.php?id=<?=$row[0]?>" class="btn btn-primary">Alterar</a>
+          <a href="confirmaremovecliente.php?id=<?=$row[0]?>" class= "btn btn-warning">Remover</a>
       </td>
       
     </tr>
@@ -99,10 +94,17 @@
   ?>
   </tbody>
 </table>
+
+
       </p>
+
     </header>
+
+   
+
   </div>
   <!-- /.container -->
+
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
@@ -110,8 +112,11 @@
     </div>
     <!-- /.container -->
   </footer>
+
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
