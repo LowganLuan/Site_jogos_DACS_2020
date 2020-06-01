@@ -9,7 +9,7 @@
   <meta name="author" content="">
 
 
-  <title>Boas Vindas!</title>
+  <title>Boas Vindas! capitao player</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
       <p class="lead">
         <form  method="post" action="login.php">
        <div align="center">  
-          <h1> Bem vindo ao site!</h1>
+          <h1> Bem vindo ao site! capitao player</h1>
           <img  src="ele chegou.gif"></img>
         </div>
         <div align="center">  
